@@ -1,0 +1,120 @@
+Study Details,United States,Unnamed: 2
+Study Code:, ,
+,301 Final protocol dated 19Dec2018,
+Phase:,III,
+Indication,"Ulcerative colitis, unspecified",
+Cost Per Procedure View,,
+Code,Procedure,Budget
+INCON,"Informed consent (Incl. Genomics Consent, Patient Assent)",200
+INCEX,Inclusion/Exclusion criteria,67
+DEMOG,Demographic data,42
+ADEVT,Adverse event assessment,60
+99211,"Vital signs, blood pressure, weight and height.",47
+93000,"12 lead ECG: Includes tracing, interpretation and report",124
+99205,"Initial examination [Includes a comprehensive Medical and social history, Ulcerative colitis history, a comprehensive physical examination including Extraintestinal manifestation,  vital signs, weight and height and blood pressure.]",266
+99215,"Complete physical exam [Includes A comprehensive physical examination including Extraintestinal manifestations, Vital signs, weight; blood pressure.]",250
+99212,"Routine follow-up [Includes at least two of these three components - focused medical history,  focused physical examination including vital signs, blood pressure.",137
+94010,"Pulmonary function test (PFT), lung function test",
+R4010,"Interpretation and Report of pulmonary function test (PFT), lung function test ",
+92133,OCT (optical coherence tomography),
+T9010,"Urine collection [Includes drug screen, urine pregnancy test if applicable, urinalysis - central lab]",26
+36415,"Blood Draw- central Lab [Includes Virology screen (HIV, HBV, HCV), QuantiFERON test (if applicable), Serum ß hCG if applicable, serum chemistry, hematology (including coagulation and CD4 T-cell count), hs-CRP, Biomarkers]",40
+99000,Lab handling and/or shipping of specimen(s) - central lab,41
+T9012,Stool Collection-central lab [calprotectin/microbiome],40
+T0299,PK Blood Sample- for central lab,74
+99000,Lab handling and/or shipping of PK blood - central lab,48
+CONMD,Concomitant medications and procedures,60
+,Procedures Sub Total (US$),
+,,
+Code,Non Procedure,Budget
+NP006,"Pharmacy, Simple ; dispense drug",41
+NP002,Nurse - Per Hour (Observation),66
+NP030,Diary Instruction - Per Visit,56
+NP031,"Diary Collection and Monitoring/Review (includes MMS, Stool frequency and rectal bleeding subscore)- Per Visit",52
+NP025,"Physician, Simple (e.g. interim visits) - Per Visit",200
+NP026,"Physician, Complex (e.g. initial visit, final visit) - Per Visit",250
+NP001,"Study Coordinator - Per Hour  questionnaires administration (includes: PGA for Total Mayo Clinic Score, IBDQ, UC-PRO/SS, SF-36, WPAI-UC, and abdominal pain and urgency NRS)",82
+NP021,"Study Coordinator, Simple (e.g. interim visits) - Per Visit",114
+NP022,"Study Coordinator, Complex (e.g. initial visit, final visit) - Per Visit",157
+,,
+Code,Conditional/Invoiceable Procedure,Total with OH
+T9010,"Urine collection [Includes: drug screen, urine pregnancy test if applicable, urinalysis - central lab]",33.8
+86580,"Skin test for tuberculosis (TB), Mantoux screening test, Tuberculin Sensitivity Test, Pirquet test, PPD test for Purified Protein Derivative",58.5
+71010,"Radiologic examination, chest, thorax, thoracic (CXR) (Chest Xray) (Chest X Ray) (Chest X-Ray); single view, fronta",184.6
+71260,"Computerized axial tomography, thorax, thoracic, chest (Cat Scan) (CT Scan); with contrast material(s)",2015
+36415,"Blood Draw- central Lab [Includes Virology screen (HIV, HBV, HCV), QuantiFERON test (if applicable), Serum ß hCG if applicable, serum chemistry, hematology (including coagulation and CD4 T-cell count), hs-CRP, Biomarkers]",52
+99000,Lab handling and/or shipping of specimen(s) - central lab,62.4
+T9012,Stool Collection-central lab [calprotectin/microbiome],52
+T0299,PK Blood Sample- for central lab,96.2
+NP006,"Pharmacy, Simple ; dispense drug - Week 12 if Patient contiues with 301",41
+NP002,Nurse - Per Hour (Observation),66
+T0299,Collection of blood for Genomic DNA (optional),80.6
+99211,"Vital signs, blood pressure, weight and height.",61.1
+93000,"12 lead ECG: Includes tracing, interpretation and report",161.2
+45330,"Proctosigmoidoscopy; diagnostic, with or without collection of specimen(s) by brushing or washing",460.2
+99000,Lab handling and/or shipping of specimen(s) - central lab,53.3
+NP004,Physician time includes reporting for Protosigmoidoscopy and colonoscopy- Per Hour  (Max 1 hour),208
+NP001,Study Coordinator - Per Hour (Max 1 hour),82
+45380,"Colonoscopy, flexible; with biopsy, single or multiple",1430
+99000,Lab handling and/or shipping of specimen(s) - central lab,53.3
+36000,"Introduction of needle or intracatheter, vein (IV line insertion)",157.3
+99152,"Moderate sedation services provided by the same physician or other qualified health care professional performing the diagnostic or therapeutic service that the sedation supports, requiring the presence of an independent trained observer to assist in the monitoring of the patients level of consciousness and physiological status; initial 15 minutes of intraservice time, patient age 5 years or older",100.1
+NP102,Anesthesiologist - Per Hour,250.9
+NP004,Physician time includes reporting for Protosigmoidoscopy and colonoscopy- Per Hour  (Max 1 hour),250
+NP001,Study Coordinator - Per Hour (Max 1 hour),82
+NP042,Daily Facility Charge - Colonoscopy,306.8
+99212,"Routine follow-up (Unscheduled) Includes at least two of these three components - a problem focused medical history, a problem focused physical examination including vital signs, straightforward medical decision making.",178.1
+94010,"Pulmonary function test (PFT), lung function test",260
+R4010,"Interpretation and Report of pulmonary function test (PFT), lung function test ",78
+NP068,"PFT - Administration of PFT for 1 hour
+",194
+92133,OCT (optical coherence tomography),348.4
+92225,"Ophthalmoscopy, extended, with retinal drawing, Fundoscopy, Optic Nerve Examination; initial; unilateral : Includes interpretation and report",288.6
+ADEVT,AE Assessments,78
+CONMD,Concomitant medications and procedures,78
+NP081,"Physician: Ophthalmology - Per Hour  
+",220
+NP004,Physician time includes reporting for Protosigmoidoscopy and colonoscopy- Per Hour  (Max 1 hour),250
+NP001,Study Coordinator - Per Hour (Max 1 hour),82
+94729,"Diffusing capacity (eg, carbon monoxide, membrane) ",169
+R4729,"Interpretation and report; Diffusing capacity (eg, carbon monoxide, membrane)",26
+94010,"Pulmonary function test (PFT), lung function test",260
+R4010,"Interpretation and Report of pulmonary function test (PFT), lung function test ",78
+NP068,"PFT - Administration of PFT for 1 hour
+",194
+NP004,Physician time includes reporting for Protosigmoidoscopy and colonoscopy- Per Hour  (Max 1 hour),208
+NP001,Study Coordinator - Per Hour (Max 1 hour),82
+92133,OCT (optical coherence tomography),348.4
+92225,"Ophthalmoscopy, extended, with retinal drawing, Fundoscopy, Optic Nerve Examination; initial; unilateral : Includes interpretation and report",288.6
+NP081,"Physician: Ophthalmology - Per Hour  
+",220
+99173,Visual acuity,48.1
+INCON,"Informed consent (Incl. Genomics Consent, Patient Assent)",260
+INCEX,Inclusion/Exclusion criteria,87.1
+ADEVT,Adverse event assessment,78
+93000,"12 lead ECG: Includes tracing, interpretation and report",161.2
+99205,"Initial examination [Includes a comprehensive Medical and social history, Ulcerative colitis history, a comprehensive physical examination including Extraintestinal manifestation,  vital signs, weight and height and blood pressure.]",345.8
+94010,"Pulmonary function test (PFT), lung function test",260
+R4010,"Interpretation and Report of pulmonary function test (PFT), lung function test ",78
+92133,OCT (optical coherence tomography),348.4
+T9010,"Urine collection [Includes: drug screen, urine pregnancy test if applicable, urinalysis - central lab]",26
+36415,"Blood Draw- central Lab [Includes Virology screen (HIV, HBV, HCV), QuantiFERON test (if applicable), Serum ß hCG if applicable, serum chemistry, hematology (including coagulation and CD4 T-cell count), hs-CRP, Biomarkers]",52
+99000,Lab handling and/or shipping of specimen(s) - central lab,62.4
+T9012,Stool Collection-central lab [calprotectin/microbiome],52
+CONMD,Concomitant medications and procedures,78
+NP004,Physician time for rescreening  ,250
+NP001,Study coordinator time for rescreening  ,82
+NP001,Prescreening total - one time fee ,820
+,,
+,,
+,,
+Code,Site Costs,Budget
+SC003,Study Start-Up Fee/Site Set-Up Fee,6000
+SC008,Pharmacy:  Set-Up Fee,1500
+SC010,Pharmacy:  Storage Costs,488
+SC020,"Document Storage, Archiving Total Cost",1000
+,Unscheduled Visits - Invoice for actual assessments completed,TBD
+SC005,Local IRB - Initial Review (Invoice per documentation provided),TBD
+,Local IRB - Annual Review (Invoice per documentation provided),TBD
+SC130,Informed Consent Re-Consent,100
+SC004,Advertising,5000

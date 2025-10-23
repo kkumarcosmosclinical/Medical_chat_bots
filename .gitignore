@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+app.log
+*.log.*
+
+# ChromaDB
+chroma/
+chroma_data/
+.chroma/
+*.sqlite*
+*.db
+
+# Uploaded files
+uploaded_pdfs/*.pdf
+Excel_files/*.xlsx
+Excel_files/*.csv
+combined.pdf
+
+# Backups
+backups/
+*.tar.gz
+*.zip
+
+# Secrets (NEVER COMMIT THESE)
+*.key
+*.pem
+secrets.txt
+credentials.json
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+nohup.out
+

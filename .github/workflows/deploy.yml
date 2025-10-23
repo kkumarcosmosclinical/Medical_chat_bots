@@ -1,0 +1,159 @@
+name: Deploy Medical Chatbot
+
+on:
+  push:
+    branches:
+      - main
+      - production
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies for testing
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run syntax checks
+        run: |
+          python -m py_compile main.py
+          python -m py_compile app.py
+          python -m py_compile config.py
+          echo "✓ All Python files are valid"
+      
+      - name: Setup SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$SERVER_IP" >> ~/.ssh/known_hosts
+      
+      - name: Create Backup on Server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR || '/home/krishan/projects/Medicalchatbot' }}
+        run: |
+          ssh ${SERVER_USER}@${SERVER_IP} "cd ${REMOTE_DIR} && mkdir -p backups && tar -czf backups/backup_\$(date +%Y%m%d_%H%M%S).tar.gz *.py chat_functions Embedding_fuctions database Excel_chat_bot 2>/dev/null || echo 'First deployment'"
+      
+      - name: Deploy to Server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR || '/home/krishan/projects/Medicalchatbot' }}
+        run: |
+          echo "📦 Uploading files to server..."
+          
+          # Upload main Python files
+          scp main.py app.py config.py requirements.txt ${SERVER_USER}@${SERVER_IP}:${REMOTE_DIR}/
+          
+          # Upload directories
+          scp -r chat_functions Embedding_fuctions database Excel_chat_bot ${SERVER_USER}@${SERVER_IP}:${REMOTE_DIR}/
+          
+          # Upload utility scripts
+          scp fix_permissions.sh fix_dirs.py FIX_CHROMADB_PERMISSIONS.sh ${SERVER_USER}@${SERVER_IP}:${REMOTE_DIR}/
+          
+          echo "✓ Files uploaded successfully"
+      
+      - name: Install Dependencies on Server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR || '/home/krishan/projects/Medicalchatbot' }}
+        run: |
+          echo "📦 Installing dependencies..."
+          ssh ${SERVER_USER}@${SERVER_IP} "cd ${REMOTE_DIR} && pip install -r requirements.txt --quiet"
+          echo "✓ Dependencies installed"
+      
+      - name: Fix Permissions
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR || '/home/krishan/projects/Medicalchatbot' }}
+        run: |
+          echo "🔧 Fixing permissions..."
+          ssh ${SERVER_USER}@${SERVER_IP} "cd ${REMOTE_DIR} && chmod +x *.sh && ./fix_permissions.sh && python fix_dirs.py"
+          echo "✓ Permissions fixed"
+      
+      - name: Restart Application
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR || '/home/krishan/projects/Medicalchatbot' }}
+        run: |
+          echo "🔄 Restarting application..."
+          ssh ${SERVER_USER}@${SERVER_IP} "cd ${REMOTE_DIR} && pkill -f 'python main.py' 2>/dev/null || echo 'No process to kill' && nohup python main.py > app.log 2>&1 &"
+          sleep 3
+          echo "✓ Application restarted"
+      
+      - name: Verify Deployment
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR || '/home/krishan/projects/Medicalchatbot' }}
+        run: |
+          echo "🔍 Verifying deployment..."
+          
+          # Check if process is running
+          if ssh ${SERVER_USER}@${SERVER_IP} "ps aux | grep 'python main.py' | grep -v grep" > /dev/null 2>&1; then
+            echo "✓ Application is running"
+          else
+            echo "✗ Application is not running!"
+            ssh ${SERVER_USER}@${SERVER_IP} "tail -50 ${REMOTE_DIR}/app.log"
+            exit 1
+          fi
+          
+          # Wait for application to start
+          sleep 5
+          
+          # Check API health
+          HTTP_CODE=$(ssh ${SERVER_USER}@${SERVER_IP} "curl -f http://localhost:5001/docs -o /dev/null -s -w '%{http_code}' || echo '000'")
+          
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✓ API is responding (HTTP $HTTP_CODE)"
+          else
+            echo "⚠ API check returned: HTTP $HTTP_CODE"
+            echo "Application may still be starting up..."
+          fi
+      
+      - name: Deployment Summary
+        if: always()
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "========================================"
+            echo "✅ Deployment Successful!"
+            echo "========================================"
+            echo ""
+            echo "🔗 Application URL: http://${SERVER_IP}:5001"
+            echo "📚 API Docs: http://${SERVER_IP}:5001/docs"
+            echo ""
+            echo "Deployment completed at: $(date)"
+          else
+            echo "========================================"
+            echo "❌ Deployment Failed!"
+            echo "========================================"
+            echo ""
+            echo "Check the logs above for details"
+            exit 1
+          fi
+      
+      - name: Notify on Failure
+        if: failure()
+        run: |
+          echo "::error::Deployment failed! Check the workflow logs for details."

@@ -1,0 +1,109 @@
+Unnamed: 0,E2027-A001-203 PCS_v26Oct2020_2Nov2020,Unnamed: 2
+ ,Currency:,
+,,
+,UNITED STATES,
+Code,Procedure,Budget
+INCON,Informed consent,127
+INCEX,Inclusion and exclusion criteria,75
+T9210,Medical history,132
+CONMD,Prior and concomitant medications,51
+S0025,MMSE,126
+S0313,GDS,36
+S0025,MoCA ,126
+S0904,SFQ,28
+S0815,CFI,63
+S0026,NPI,172
+S0241,CIBIS-Plus ,118
+S0061,CIBIC-Plus ,120
+S0138,WAIS-R DSC ,128
+S0123,SAPS-PD ,64
+S0517,FAQ ,26
+S0002,CGIC,50
+S0045,Modified Hachinski Ischemic Scale,55
+S0040,UPDRS-III,66
+S0023,HYS,56
+S0917,C-SSRS,94
+99211,Vital signs,52
+99205,Complete physical examination,269
+99212,Brief physical examination,149
+T1206,12-lead ECG,250
+36415,Blood for clinical laboratory tests,48
+99000,"Blood for clinical laboratory tests, lab handling and/or shipping",41
+T9010,Urine collection for urinalysis,24
+99000,"Urine collection for urinalysis, lab handling and/or shipping",41
+80305,Urine drug screen,48
+84702,Serum pregnancy test,45
+84703,Urine Pregnancy test,31
+70551,Safety brain MRI ,1884
+62270,CSF sample by LP for PK and PD biomarkers,591
+T9013,"CSF sample by LP for PK and PD biomarkers, sample processing and shipping",270
+T0299,PK sampling,63
+99000,"PK sampling, lab handling and/or shipping",41
+ADEVT,Adverse events,51
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+Code,Non Procedures,Budget
+NP004,Physician Time (per hour) including reprospective chart review,201
+NP001,Study Coordinator Time (per hour)  including reprospective chart review,84
+NP006,Pharmacy (dispense study drug),48
+NP009,Daily facility charge,102
+NP007,Patient reimbursement,51
+NP007,Caregiver reimbursement,51
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,Additional Fees,
+SC003,"Study Startup Fee (upon IRB approval, completion of all contractual and regulatory documentation and SIV completion )",6450
+SC023,Study Close out: including all activities related to closing out the site,1001
+SC020,"Document Storage, Archiving Total Cost",1000
+,Invoiceable Items,
+SC130,Reconsent (if applicable),78
+,Courier charge (upon Sponsor's approval),
+78607,DAT brain imaging,1200
+78451,MIBG scan,840
+70551,Safety brain MRI for UNS,1884

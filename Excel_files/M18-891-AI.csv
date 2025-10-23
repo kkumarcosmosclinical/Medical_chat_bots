@@ -1,0 +1,74 @@
+Study Product,Unnamed: 1,Unnamed: 2
+Upadacitinib,,
+Per Subject Costs,,
+,Cost Per Procedure View,
+Code,Procedure,Budget
+INCON,Subject information and informed consent,111
+INCEX,Inclusion/Exclusion criteria,68
+T9210,Medical/Surgical history (includes Drug and Alcohol history at Screening),119
+CONMD,Prior/concomitant therapy,47
+S0465,Latent TB risk factor questionnaire,27
+S0910,Worst Pruritus NRS,5
+S0911,ADerm-SS,13
+S0911,ADerm-IS,13
+S0558,SCORAD-Patient Reported & Investigator Assessment,135
+S0083,DLQI (Or CDLQI),37
+S0912,POEM,13
+S0667,HADS,25
+S0034,EQ-5D-5L,34
+S0910,PGIS,5
+S0910,PGIC,5
+S0910,PGIT,5
+99211,Vital Signs Including Body weight & Height,49
+T9207,Physical Exam,192
+S0053,Tanner staging,44
+ADEVT,Adverse Event Assessment,47
+S0014,EASI-Investigator Assessment,133
+BSA  ,BSA-Investigator Assessment,34
+S0903,vIGA-Investigator Assessment,19
+S0014,HECSI-Investigator Assessment,133
+T9010,Urine collection for Central Lab Tests & Urine Pregnancy (If applicable),20
+36415,Blood draws for Central Lab tests (not including PK Samples),42
+99000,"Lab handling and/or shipping of specimen(s), simple",39
+T0299,Blood samples for Upadacitinib PK assay ,58
+98966,Telephone Call,37
+,,
+,,
+Code,Non Procedure,Budget
+NP006,"Pharmacy, Simple- Per Preparation; dispense drug",41
+NP030,Dispense Hand-held ePRO,53
+NP021,"Study Coordinator, Simple - Per Visit",124
+NP022,"Study Coordinator, Complex - Per Visit",163
+NP025,"Physician, Simple - Per Visit",148
+NP026,"Physician, Complex - Per Visit",210
+NP012,"Study Coordinator, Electronic Data Capture (EDC) - Per Hour",49
+,Conditional Procedures,
+99212,Symptom directed physical exam,121
+93005,12-lead ECG: Tracing only,105
+93010,12-lead ECG: Interpretation and Report,55
+71020,"Chest X-Ray; two views, frontal and lateral",187
+R1020,"Interpretation and Report of Chest X-Ray; two views, frontal and lateral",50
+86580,"Skin test, tuberculosis (TB);PPD test for Purified Protein Derivative",43
+GNCON,Photography Substudy-Consent,35
+T5057,Photography (Select sites only),58
+S0903,Review pregnancy avoidance recommendations (females of childbearing potential only),19
+T0299,Whole Blood for Pharmacogenetic DNA (Optional Biomarker),58
+36415,Blood draws for Central Lab Re-tests,42
+99000,Lab handling and shipping of Central Lab Re-tests,39
+,Additional Fees,
+,Study Start-up,2500
+,Department Start-up - Labs,600
+,Record Retention,1000
+,Screen Failures,0
+,Local IRB/IEC Fees,7000
+,Pharmacy Fees,2500
+,Incubator Rental,1800
+,Study Related Expenses,5000
+,Re-Consenting Fees,1428
+," 
+", 
+,SAE Reporting Payments,2370
+,Unscheduled Visits and Conditional Procedure Payments,67830
+,Site Advertising and Recruitment Activities,3000
+,Program Recruitment Campaign Support: Screening of Referrals,5000
+,Pre-Screen/Chart review,1550

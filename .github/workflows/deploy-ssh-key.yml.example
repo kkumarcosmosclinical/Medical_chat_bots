@@ -1,0 +1,158 @@
+name: Deploy Medical Chatbot (SSH Key - More Secure)
+
+# This is an alternative, more secure deployment method using SSH keys
+# To use this:
+# 1. Rename this file to deploy.yml
+# 2. Delete the password-based deploy.yml
+# 3. Generate SSH key pair and add to GitHub Secrets
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run basic syntax checks
+        run: |
+          python -m py_compile main.py
+          python -m py_compile app.py
+      
+      - name: Setup SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$SERVER_IP" >> ~/.ssh/known_hosts
+      
+      - name: Deploy to Server
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT || '22' }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          # Create deployment script
+          cat > deploy.sh << 'EOF'
+          #!/bin/bash
+          set -e
+          
+          echo "===== Starting Deployment ====="
+          
+          # Application directory
+          APP_DIR="$HOME/medical_chat_bots"
+          
+          # Create directory if it doesn't exist
+          mkdir -p "$APP_DIR"
+          cd "$APP_DIR"
+          
+          # Clone or update repository
+          if [ -d ".git" ]; then
+            echo "Updating existing repository..."
+            git fetch origin
+            git reset --hard origin/main
+            git pull origin main
+          else
+            echo "Cloning repository..."
+            git clone https://github.com/$GITHUB_REPOSITORY.git .
+          fi
+          
+          # Setup Docker network
+          echo "Setting up Docker network..."
+          docker network create chroma_network 2>/dev/null || echo "Network already exists"
+          
+          # Stop existing containers
+          echo "Stopping existing containers..."
+          docker-compose down 2>/dev/null || true
+          
+          # Remove old images
+          echo "Removing old images..."
+          docker-compose rm -f 2>/dev/null || true
+          
+          # Build and start containers
+          echo "Building and starting containers..."
+          docker-compose build --no-cache
+          docker-compose up -d
+          
+          # Wait for startup
+          echo "Waiting for containers to start..."
+          sleep 15
+          
+          # Check container health
+          echo "Checking container status..."
+          if docker ps | grep -q medical_chatbot; then
+            echo "✅ Container is running"
+            docker ps | grep medical_chatbot
+          else
+            echo "❌ Container failed to start"
+            docker logs medical_chatbot_app
+            exit 1
+          fi
+          
+          # Health check
+          echo "Performing health check..."
+          for i in {1..10}; do
+            if curl -f http://localhost:5001/docs >/dev/null 2>&1; then
+              echo "✅ Application is healthy"
+              break
+            fi
+            echo "Waiting for application... ($i/10)"
+            sleep 5
+          done
+          
+          # Cleanup
+          echo "Cleaning up unused Docker resources..."
+          docker system prune -f
+          
+          echo "===== Deployment Complete ====="
+          EOF
+          
+          # Make script executable
+          chmod +x deploy.sh
+          
+          # Copy files to server
+          echo "Copying files to server..."
+          scp -P "$SERVER_PORT" -r * "$SERVER_USER@$SERVER_IP:~/medical_chat_bots/"
+          
+          # Execute deployment
+          echo "Executing deployment on server..."
+          ssh -p "$SERVER_PORT" "$SERVER_USER@$SERVER_IP" "export GITHUB_REPOSITORY=$GITHUB_REPOSITORY && bash ~/medical_chat_bots/deploy.sh"
+          
+          # Final verification
+          echo "Final verification..."
+          ssh -p "$SERVER_PORT" "$SERVER_USER@$SERVER_IP" "docker ps && docker logs --tail 20 medical_chatbot_app"
+          
+          echo "✅ Deployment completed successfully!"
+      
+      - name: Send Deployment Notification
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ Deployment to ${{ secrets.SERVER_IP }} completed successfully!"
+            echo "🔗 Access your application at: http://${{ secrets.SERVER_IP }}:5001/docs"
+          else
+            echo "❌ Deployment failed! Check the logs above for details."
+            exit 1
+          fi
+
